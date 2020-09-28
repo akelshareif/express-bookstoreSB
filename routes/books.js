@@ -10,7 +10,7 @@ const router = new express.Router();
 router.get('/', async function (req, res, next) {
     try {
         const books = await Book.findAll(req.query);
-        return res.json({ books });
+        return res.status(200).json({ books });
     } catch (err) {
         return next(err);
     }
@@ -21,7 +21,7 @@ router.get('/', async function (req, res, next) {
 router.get('/:id', async function (req, res, next) {
     try {
         const book = await Book.findOne(req.params.id);
-        return res.json({ book });
+        return res.status(200).json({ book });
     } catch (err) {
         return next(err);
     }
@@ -68,7 +68,7 @@ router.put('/:isbn', async function (req, res, next) {
 router.delete('/:isbn', async function (req, res, next) {
     try {
         await Book.remove(req.params.isbn);
-        return res.json({ message: 'Book deleted' });
+        return res.status(200).json({ message: 'Book deleted' });
     } catch (err) {
         return next(err);
     }
